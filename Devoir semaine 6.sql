@@ -32,3 +32,11 @@ WHERE e.job_id IN (
   FROM jobs
   WHERE job_lvl < max_lvl
 );
+
+-- 5 Noms complets des employés qui ont un salaire au-dessus de la moyenne de salaire chez leur employeur.
+
+SELECT CONCAT(e.fname, ' ', e.lname) AS 'Full Name', e.salary, e.pub_id, AVG(e2.salary) AS 'Average Salary'
+FROM employees e
+JOIN employees e2 ON e.pub_id = e2.pub_id
+GROUP BY e.pub_id, e.salary, e.emp_id
+HAVING e.salary > AVG(e2.salary);

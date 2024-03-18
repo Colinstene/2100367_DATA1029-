@@ -60,3 +60,17 @@ FROM titles t
 JOIN sales s ON t.title_id = s.title_id
 GROUP BY t.type
 ORDER BY SUM(s.qty) DESC;
+
+-- 8.Pour chaque boutique, les 2 livres les plus vendus et leurs prix.
+SELECT s.stor_name AS 'Store Name', t.title AS 'Title', t.price AS 'Price'
+FROM stores s
+JOIN (
+  SELECT stor_id, title_id, SUM(qty) AS total_qty
+  FROM sales
+  GROUP BY stor_id, title_id
+  ORDER BY total_qty DESC, stor_id
+) sq ON s.stor_id = sq.stor_id
+JOIN titles t ON sq.title_id = t.title_id
+GROUP BY s.stor_id, t.title_id
+ORDER BY s.stor_id, total_qty DESC
+LIMIT 2;

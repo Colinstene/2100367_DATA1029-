@@ -40,3 +40,15 @@ FROM employees e
 JOIN employees e2 ON e.pub_id = e2.pub_id
 GROUP BY e.pub_id, e.salary, e.emp_id
 HAVING e.salary > AVG(e2.salary);
+
+
+-- 6 Noms complets des employés qui ont le salaire minimum de leur grade
+
+SELECT CONCAT(e.fname, ' ', e.lname) AS 'Full Name', e.salary, j.job_desc, j.min_lvl, j.max_lvl
+FROM employees e
+JOIN jobs j ON e.job_id = j.job_id
+WHERE e.salary = (
+  SELECT MIN(e2.salary)
+  FROM employees e2
+  WHERE e2.job_id = e.job_id
+);

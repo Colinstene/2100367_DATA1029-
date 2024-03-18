@@ -16,3 +16,9 @@ ORDER BY employer;
 SELECT CONCAT(e.fname, ' ', e.lname) AS 'Full Name', e.salary        
 FROM employees e
 WHERE e.salary > (SELECT salary FROM employees WHERE lname = 'Zongo' AND fname = 'Norbert');
+
+-- 3.Noms complets des employés des éditeurs canadiens.
+select concat(e.fname, ' ',e.lname) AS 'Full Name', p.pub_name AS employer 
+from  employees e 
+inner join publishers p ON e.pub_id=p.pub_id
+where P.country = 'Canada';

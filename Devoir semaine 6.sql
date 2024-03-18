@@ -74,3 +74,14 @@ JOIN titles t ON sq.title_id = t.title_id
 GROUP BY s.stor_id, t.title_id
 ORDER BY s.stor_id, total_qty DESC
 LIMIT 2;
+
+
+-- 9.Les auteurs des 5 livres les plus vendus.
+SELECT a.au_id, CONCAT(a.au_fname, ' ', a.au_lname) AS author_name, COUNT(s.title_id) AS total_sales
+FROM titles t
+INNER JOIN sales s ON t.title_id = s.title_id
+INNER JOIN titleauthor ta ON t.title_id = ta.title_id
+INNER JOIN authors a ON ta.au_id = a.au_id
+GROUP BY a.au_id, author_name
+ORDER BY total_sales DESC
+LIMIT 5;

@@ -52,3 +52,11 @@ WHERE e.salary = (
   FROM employees e2
   WHERE e2.job_id = e.job_id
 );
+
+
+-- 7.De quels types sont les livres les plus vendus?
+SELECT t.type
+FROM titles t
+JOIN sales s ON t.title_id = s.title_id
+GROUP BY t.type
+ORDER BY SUM(s.qty) DESC;

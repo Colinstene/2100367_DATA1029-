@@ -85,3 +85,11 @@ INNER JOIN authors a ON ta.au_id = a.au_id
 GROUP BY a.au_id, author_name
 ORDER BY total_sales DESC
 LIMIT 5;
+
+
+-- 10--Prix moyens des livres par maisons d’édition.
+SELECT p.pub_id, p.pub_name, AVG(t.price) AS average_price
+FROM titles t
+INNER JOIN publishers p ON t.pub_id = p.pub_id
+GROUP BY p.pub_id, p.pub_name
+ORDER BY average_price DESC;

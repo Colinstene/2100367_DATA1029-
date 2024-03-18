@@ -93,3 +93,12 @@ FROM titles t
 INNER JOIN publishers p ON t.pub_id = p.pub_id
 GROUP BY p.pub_id, p.pub_name
 ORDER BY average_price DESC;
+
+-- 11-Les 3 auteurs ayant les plus de livres
+SELECT authors.au_id, au_fname, au_lname, COUNT(*) AS book_count 
+FROM titleauthor 
+JOIN authors ON titleauthor.au_id = authors.au_id 
+GROUP BY authors.au_id, au_fname, au_lname 
+ORDER BY book_count DESC 
+LIMIT 3;
+

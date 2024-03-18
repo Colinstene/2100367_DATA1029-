@@ -22,3 +22,13 @@ select concat(e.fname, ' ',e.lname) AS 'Full Name', p.pub_name AS employer
 from  employees e 
 inner join publishers p ON e.pub_id=p.pub_id
 where P.country = 'Canada';
+
+-- 4-- Noms complets des employés qui ont un manager
+
+SELECT CONCAT(e.fname, ' ', e.lname) AS 'Full Name'
+FROM employees e
+WHERE e.job_id IN (
+  SELECT job_id
+  FROM jobs
+  WHERE job_lvl < max_lvl
+);

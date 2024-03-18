@@ -12,7 +12,7 @@ JOIN (
 ORDER BY employer;
 
 
--- 4.Noms complets des employés ayant un salaire supérieur à celui de Norbert Zongo.
+-- 2.Noms complets des employés ayant un salaire supérieur à celui de Norbert Zongo.
 SELECT CONCAT(e.fname, ' ', e.lname) AS 'Full Name', e.salary        
 FROM employees e
 WHERE e.salary > (SELECT salary FROM employees WHERE lname = 'Zongo' AND fname = 'Norbert');
